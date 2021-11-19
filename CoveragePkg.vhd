@@ -437,6 +437,7 @@ package CoveragePkg is
   procedure ICover     (ID : CoverageIDType; CovPoint : integer) ;
 
   procedure ClearCov (ID : CoverageIDType) ;
+  procedure ClearCov (ID : CoverageIDType; CovPointSubset : integer_vector) ;
 
   ------------------------------------------------------------
   -- /////////////////////////////////////////
@@ -446,6 +447,7 @@ package CoveragePkg is
   ------------------------------------------------------------
   impure function IsCovered     (ID : CoverageIDType; PercentCov : real ) return boolean ;
   impure function IsCovered     (ID : CoverageIDType) return boolean ;
+  impure function IsCovered     (ID : CoverageIDType; CovPointSubset : integer_vector) return boolean ;
 
   impure function IsInitialized (ID : CoverageIDType) return boolean ;
 
@@ -458,13 +460,17 @@ package CoveragePkg is
 
   ------------------------------------------------------------
   impure function GetMinCov   (ID : CoverageIDType) return real ;
+  impure function GetMinCov   (ID : CoverageIDType; CovPointSubset : integer_vector) return real;
   impure function GetMinCount (ID : CoverageIDType) return integer ;
   impure function GetMaxCov   (ID : CoverageIDType) return real ;
+  impure function GetMaxCov   (ID : CoverageIDType; CovPointSubset : integer_vector) return real;
   impure function GetMaxCount (ID : CoverageIDType) return integer ;
 
   ------------------------------------------------------------
   impure function CountCovHoles (ID : CoverageIDType; PercentCov : real ) return integer ;
+  impure function CountCovHoles (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return integer ;
   impure function CountCovHoles (ID : CoverageIDType) return integer ;
+  impure function CountCovHoles (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer ;
 
   ------------------------------------------------------------
   -- /////////////////////////////////////////
@@ -484,7 +490,9 @@ package CoveragePkg is
   impure function GetRandPoint (ID : CoverageIDType) return integer ;
   impure function GetRandPoint (ID : CoverageIDType; PercentCov : real ) return integer ;
   impure function GetRandPoint (ID : CoverageIDType) return integer_vector ;
+  impure function GetRandPoint (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer_vector ;
   impure function GetRandPoint (ID : CoverageIDType; PercentCov : real ) return integer_vector ;
+  impure function GetRandPoint (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return integer_vector ;
   impure function GetIncPoint  (ID : CoverageIDType) return integer ;
   impure function GetIncPoint  (ID : CoverageIDType) return integer_vector ;
   impure function GetMinPoint  (ID : CoverageIDType) return integer ;
@@ -501,12 +509,14 @@ package CoveragePkg is
   impure function RandCovPoint (ID : CoverageIDType) return integer ;
   impure function RandCovPoint (ID : CoverageIDType; PercentCov : real ) return integer ;
   impure function RandCovPoint (ID : CoverageIDType) return integer_vector ;
+  impure function RandCovPoint (ID : CoverageIDType; CovPointSubset: integer_vector) return integer_vector;
   impure function RandCovPoint (ID : CoverageIDType; PercentCov : real ) return integer_vector ;
 
   ------------------------------------------------------------
   -- Return BinVals
   impure function GetBinVal     (ID : CoverageIDType; BinIndex : integer ) return RangeArrayType ;
   impure function GetRandBinVal (ID : CoverageIDType; PercentCov : real ) return RangeArrayType ;
+  impure function GetRandBinVal (ID : CoverageIDType; PercentCov : real ; CovPointSubset : integer_vector) return RangeArrayType ;
   impure function GetRandBinVal (ID : CoverageIDType) return RangeArrayType ;
   impure function GetLastBinVal (ID : CoverageIDType) return RangeArrayType ;
   impure function GetIncBinVal  (ID : CoverageIDType) return RangeArrayType ;
@@ -526,7 +536,9 @@ package CoveragePkg is
   ------------------------------------------------------------
   impure function GetNumBins   (ID : CoverageIDType) return integer ;
   impure function GetRandIndex (ID : CoverageIDType; CovTargetPercent : real ) return integer ;
+  impure function GetRandIndex (ID : CoverageIDType; CovTargetPercent : real; CovPointSubset : integer_vector ) return integer ;
   impure function GetRandIndex (ID : CoverageIDType) return integer ;
+  impure function GetRandIndex (ID : CoverageIDType; CovPointSubset : integer_vector) return integer ;
   impure function GetLastIndex (ID : CoverageIDType) return integer ;
   impure function GetIncIndex  (ID : CoverageIDType) return integer ;
   impure function GetMinIndex  (ID : CoverageIDType) return integer ;
@@ -934,6 +946,7 @@ package CoveragePkg is
     procedure ICover     (ID : CoverageIDType; CovPoint : integer) ;
 
     procedure ClearCov (ID : CoverageIDType) ;
+    procedure ClearCov (ID : CoverageIDType; CovPointSubset : integer_vector) ;
 
     ------------------------------------------------------------
     -- /////////////////////////////////////////
@@ -943,6 +956,7 @@ package CoveragePkg is
     ------------------------------------------------------------
     impure function IsCovered     (ID : CoverageIDType; PercentCov : real ) return boolean ;
     impure function IsCovered     (ID : CoverageIDType) return boolean ;
+    impure function IsCovered     (ID : CoverageIDType; CovPointSubset : integer_vector) return boolean;
 
     impure function IsInitialized (ID : CoverageIDType) return boolean ;
 
@@ -955,13 +969,17 @@ package CoveragePkg is
 
     ------------------------------------------------------------
     impure function GetMinCov   (ID : CoverageIDType) return real ;
+    impure function GetMinCov   (ID : CoverageIDType; CovPointSubset : integer_vector) return real;
     impure function GetMinCount (ID : CoverageIDType) return integer ;
     impure function GetMaxCov   (ID : CoverageIDType) return real ;
+    impure function GetMaxCov   (ID : CoverageIDType; CovPointSubset : integer_vector) return real;
     impure function GetMaxCount (ID : CoverageIDType) return integer ;
 
     ------------------------------------------------------------
     impure function CountCovHoles (ID : CoverageIDType; PercentCov : real ) return integer ;
+    impure function CountCovHoles (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return integer ;
     impure function CountCovHoles (ID : CoverageIDType) return integer ;
+    impure function CountCovHoles (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer ;
 
     ------------------------------------------------------------
     -- /////////////////////////////////////////
@@ -981,7 +999,9 @@ package CoveragePkg is
     impure function GetRandPoint (ID : CoverageIDType) return integer ;
     impure function GetRandPoint (ID : CoverageIDType; PercentCov : real ) return integer ;
     impure function GetRandPoint (ID : CoverageIDType) return integer_vector ;
+    impure function GetRandPoint (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer_vector ;
     impure function GetRandPoint (ID : CoverageIDType; PercentCov : real ) return integer_vector ;
+    impure function GetRandPoint (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return integer_vector ;
     impure function GetIncPoint  (ID : CoverageIDType) return integer ;
     impure function GetIncPoint  (ID : CoverageIDType) return integer_vector ;
     impure function GetMinPoint  (ID : CoverageIDType) return integer ;
@@ -998,12 +1018,14 @@ package CoveragePkg is
     impure function RandCovPoint (ID : CoverageIDType) return integer ;
     impure function RandCovPoint (ID : CoverageIDType; PercentCov : real ) return integer ;
     impure function RandCovPoint (ID : CoverageIDType) return integer_vector ;
+    impure function RandCovPoint (ID : CoverageIDType; CovPointSubset : integer_vector) return integer_vector;
     impure function RandCovPoint (ID : CoverageIDType; PercentCov : real ) return integer_vector ;
 
     ------------------------------------------------------------
     -- Return BinVals
     impure function GetBinVal     (ID : CoverageIDType; BinIndex : integer ) return RangeArrayType ;
     impure function GetRandBinVal (ID : CoverageIDType; PercentCov : real ) return RangeArrayType ;
+    impure function GetRandBinVal (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return RangeArrayType ;
     impure function GetRandBinVal (ID : CoverageIDType) return RangeArrayType ;
     impure function GetLastBinVal (ID : CoverageIDType) return RangeArrayType ;
     impure function GetIncBinVal  (ID : CoverageIDType) return RangeArrayType ;
@@ -1023,7 +1045,9 @@ package CoveragePkg is
     ------------------------------------------------------------
     impure function GetNumBins   (ID : CoverageIDType) return integer ;
     impure function GetRandIndex (ID : CoverageIDType; CovTargetPercent : real ) return integer ;
+    impure function GetRandIndex (ID : CoverageIDType; CovTargetPercent : real; CovPointSubset : integer_vector ) return integer ;
     impure function GetRandIndex (ID : CoverageIDType) return integer ;
+    impure function GetRandIndex (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer ;
     impure function GetLastIndex (ID : CoverageIDType) return integer ;
     impure function GetIncIndex  (ID : CoverageIDType) return integer ;
     impure function GetMinIndex  (ID : CoverageIDType) return integer ;
@@ -1231,12 +1255,14 @@ package CoveragePkg is
     procedure ICover( CovPoint : integer_vector) ;
 
     procedure ClearCov ;
+    procedure ClearCov (CovPointSubset : integer_vector) ;
     procedure SetCovZero ;  -- Deprecated
 
     ------------------------------------------------------------
     --  Coverage Information and Statistics
     impure function IsCovered return boolean ;
     impure function IsCovered ( PercentCov : real ) return boolean ;
+    impure function IsCovered (CovPointSubset : integer_vector) return boolean;
     impure function IsInitialized return boolean ;
 
     ------------------------------------------------------------
@@ -1248,13 +1274,17 @@ package CoveragePkg is
 
     ------------------------------------------------------------
     impure function GetMinCov return real ;       -- PercentCov
+    impure function GetMinCov ( CovPointSubset : integer_vector ) return real;
     impure function GetMinCount return integer ;  -- Count
+    impure function GetMaxCov ( CovPointSubset : integer_vector ) return real;
     impure function GetMaxCov return real ;       -- PercentCov
     impure function GetMaxCount return integer ;  -- Count
 
     ------------------------------------------------------------
     impure function CountCovHoles ( PercentCov : real ) return integer ;
+    impure function CountCovHoles ( PercentCov : real; CovPointSubset : integer_vector ) return integer;
     impure function CountCovHoles return integer ;
+    impure function CountCovHoles ( CovPointSubset : integer_vector ) return integer ;
 
     ------------------------------------------------------------
     -- Return Points
@@ -1263,7 +1293,9 @@ package CoveragePkg is
     impure function GetRandPoint return integer ;
     impure function GetRandPoint ( PercentCov : real ) return integer ;
     impure function GetRandPoint return integer_vector ;
+    impure function GetRandPoint (CovPointSubset : integer_vector ) return integer_vector ;
     impure function GetRandPoint ( PercentCov : real ) return integer_vector ;
+    impure function GetRandPoint ( PercentCov : real; CovPointSubset : integer_vector ) return integer_vector ;
     impure function GetIncPoint return integer ;
     impure function GetIncPoint return integer_vector ;
     impure function GetMinPoint return integer ;
@@ -1279,6 +1311,7 @@ package CoveragePkg is
     impure function RandCovPoint return integer ;
     impure function RandCovPoint ( PercentCov : real ) return integer ;
     impure function RandCovPoint return integer_vector ;
+    impure function RandCovPoint (CovPointSubset : integer_vector) return integer_vector;
     impure function RandCovPoint ( PercentCov : real ) return integer_vector ;
 
     ------------------------------------------------------------
@@ -1286,6 +1319,7 @@ package CoveragePkg is
     impure function GetBinVal ( BinIndex : integer ) return RangeArrayType ;
     impure function GetRandBinVal return RangeArrayType ;
     impure function GetRandBinVal ( PercentCov : real ) return RangeArrayType ;
+    impure function GetRandBinVal ( PercentCov : real; CovPointSubset : integer_vector ) return RangeArrayType ;
     impure function GetLastBinVal return RangeArrayType ;
     impure function GetIncBinVal  return RangeArrayType ;
     impure function GetMinBinVal  return RangeArrayType ;
@@ -1304,7 +1338,9 @@ package CoveragePkg is
     -- Return Index
     impure function GetNumBins return integer ;
     impure function GetRandIndex return integer ;
+    impure function GetRandIndex (CovPointSubset : integer_vector ) return integer ;
     impure function GetRandIndex ( CovTargetPercent : real ) return integer ;
+    impure function GetRandIndex ( CovTargetPercent : real; CovPointSubset : integer_vector ) return integer ;
     impure function GetLastIndex return integer ;
     impure function GetIncIndex return integer ;
     impure function GetMinIndex return integer ;
@@ -2035,6 +2071,22 @@ package body CoveragePkg is
     end loop ;
     return aMessage ;
   end function GetWord ;
+
+  ------------------------------------------------------------
+  -- Local.
+  function CheckCovPointSubsetInBinVal (BinVal: RangeArrayType; CovPointSubset : integer_vector) return boolean is
+  ------------------------------------------------------------
+    alias norm_CovPointSubset : integer_vector(1 to CovPointSubset'length+1-1) is CovPointSubset;
+    variable hit    : boolean_vector(1 to CovPointSubset'length+1-1) := (others => false);
+  begin
+    check_loop: for m in norm_CovPointSubset'range loop
+      hit(m) := norm_CovPointSubset(m) >= BinVal(m).min and norm_CovPointSubset(m) <= BinVal(m).max;
+      exit check_loop when hit(m) = false;
+    end loop check_loop;  -- i
+    return and(hit);
+  end function CheckCovPointSubsetInBinVal ;
+
+  ------------------------------------------------------------
 
   ------------------------------------------------------------------------------------------
   --  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  CovPType  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -3146,6 +3198,20 @@ package body CoveragePkg is
     end procedure ClearCov ;
 
     ------------------------------------------------------------
+    procedure ClearCov (ID : CoverageIDType; CovPointSubset : integer_vector) is
+    ------------------------------------------------------------
+    begin
+      for i in 1 to CovStructPtr(ID.ID).NumBins loop
+        if CheckCovPointSubsetInBinVal(CovStructPtr(ID.ID).CovBinPtr( i ).BinVal.all, CovPointSubset) then
+          CovStructPtr(ID.ID).CovBinPtr(i).Count := 0 ;
+          CovStructPtr(ID.ID).CovBinPtr(i).PercentCov := CalcPercentCov(
+            Count => CovStructPtr(ID.ID).CovBinPtr.all(i).Count,
+            AtLeast =>  CovStructPtr(ID.ID).CovBinPtr.all(i).AtLeast ) ;
+        end if ;
+      end loop ;
+    end procedure ClearCov ;
+
+    ------------------------------------------------------------
     impure function GetMinCov (ID : CoverageIDType) return real is
     ------------------------------------------------------------
       variable MinCov : real := real'right ;  -- big number
@@ -3154,6 +3220,21 @@ package body CoveragePkg is
         if CovStructPtr(ID.ID).CovBinPtr(i).action = COV_COUNT and CovStructPtr(ID.ID).CovBinPtr(i).PercentCov < MinCov then
           MinCov := CovStructPtr(ID.ID).CovBinPtr(i).PercentCov ;
         end if ;
+      end loop CovLoop ;
+      return MinCov ;
+    end function GetMinCov ;
+
+    ------------------------------------------------------------
+    impure function GetMinCov (ID : CoverageIDType; CovPointSubset : integer_vector) return real is
+    ------------------------------------------------------------
+      variable MinCov : real := real'right ;  -- big number
+    begin
+      CovLoop : for i in 1 to CovStructPtr(ID.ID).NumBins loop
+        if CheckCovPointSubsetInBinVal(CovStructPtr(ID.ID).CovBinPtr( i ).BinVal.all, CovPointSubset) then
+          if CovStructPtr(ID.ID).CovBinPtr(i).action = COV_COUNT and CovStructPtr(ID.ID).CovBinPtr(i).PercentCov < MinCov then
+            MinCov := CovStructPtr(ID.ID).CovBinPtr(i).PercentCov ;
+          end if ;
+        end if;
       end loop CovLoop ;
       return MinCov ;
     end function GetMinCov ;
@@ -3179,6 +3260,21 @@ package body CoveragePkg is
       CovLoop : for i in 1 to CovStructPtr(ID.ID).NumBins loop
         if CovStructPtr(ID.ID).CovBinPtr(i).action = COV_COUNT and CovStructPtr(ID.ID).CovBinPtr(i).PercentCov > MaxCov then
           MaxCov := CovStructPtr(ID.ID).CovBinPtr(i).PercentCov ;
+        end if ;
+      end loop CovLoop ;
+      return MaxCov ;
+    end function GetMaxCov ;
+
+    ------------------------------------------------------------
+    impure function GetMaxCov (ID : CoverageIDType; CovPointSubset : integer_vector) return real is
+    ------------------------------------------------------------
+      variable MaxCov : real := 0.0 ;
+    begin
+      CovLoop : for i in 1 to CovStructPtr(ID.ID).NumBins loop
+        if CheckCovPointSubsetInBinVal(CovStructPtr(ID.ID).CovBinPtr( i ).BinVal.all, CovPointSubset) then
+          if CovStructPtr(ID.ID).CovBinPtr(i).action = COV_COUNT and CovStructPtr(ID.ID).CovBinPtr(i).PercentCov > MaxCov then
+            MaxCov := CovStructPtr(ID.ID).CovBinPtr(i).PercentCov ;
+          end if ;
         end if ;
       end loop CovLoop ;
       return MaxCov ;
@@ -3211,10 +3307,32 @@ package body CoveragePkg is
     end function CountCovHoles ;
 
     ------------------------------------------------------------
+    impure function CountCovHoles (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return integer is
+    ------------------------------------------------------------
+      variable HoleCount : integer := 0 ;
+    begin
+      CovLoop : for i in 1 to CovStructPtr(ID.ID).NumBins loop
+        if CheckCovPointSubsetInBinVal(CovStructPtr(ID.ID).CovBinPtr( i ).BinVal.all, CovPointSubset) then
+          if CovStructPtr(ID.ID).CovBinPtr(i).action = COV_COUNT and CovStructPtr(ID.ID).CovBinPtr(i).PercentCov < PercentCov then
+            HoleCount := HoleCount + 1 ;
+          end if ;
+        end if ;
+      end loop CovLoop ;
+      return HoleCount ;
+    end function CountCovHoles ;
+
+    ------------------------------------------------------------
     impure function CountCovHoles (ID : CoverageIDType) return integer is
     ------------------------------------------------------------
     begin
       return CountCovHoles(ID, CovStructPtr(ID.ID).CovTarget) ;
+    end function CountCovHoles ;
+
+    ------------------------------------------------------------
+    impure function CountCovHoles (ID : CoverageIDType; CovPointSubset : integer_vector) return integer is
+    ------------------------------------------------------------
+    begin
+      return CountCovHoles(ID, CovStructPtr(ID.ID).CovTarget, CovPointSubset) ;
     end function CountCovHoles ;
 
     ------------------------------------------------------------
@@ -3231,6 +3349,14 @@ package body CoveragePkg is
     begin
       -- AlertIf(CovStructPtr(ID.ID).NumBins < 1, OSVVM_COVERAGE_ALERTLOG_ID, "CoveragePkg.IsCovered: Empty Coverage Model", failure) ;
       return CountCovHoles(ID, CovStructPtr(ID.ID).CovTarget) = 0 ;
+    end function IsCovered ;
+
+    ------------------------------------------------------------
+    impure function IsCovered (ID : CoverageIDType; CovPointSubset : integer_vector) return boolean is
+    ------------------------------------------------------------
+    begin
+      -- AlertIf(CovStructPtr(ID.ID).NumBins < 1, OSVVM_COVERAGE_ALERTLOG_ID, "CoveragePkg.IsCovered: Empty Coverage Model", failure) ;
+      return CountCovHoles(ID, CovStructPtr(ID.ID).CovTarget, CovPointSubset) = 0 ;
     end function IsCovered ;
 
     ------------------------------------------------------------
@@ -3392,10 +3518,73 @@ package body CoveragePkg is
     end function GetRandIndex ;
 
     ------------------------------------------------------------
+    impure function GetRandIndex (ID : CoverageIDType; CovTargetPercent : real; CovPointSubset : integer_vector ) return integer is
+    ------------------------------------------------------------
+      variable WeightVec : integer_vector(0 to CovStructPtr(ID.ID).NumBins-1) := (others => 0);  -- Prep for change to DistInt
+      variable MaxCovPercent : real ;
+      variable MinCovPercent : real ;
+      variable rInt : integer ;
+      function to_string (iv : integer_vector) return string is
+        alias a_iv : integer_vector(1 to iv'length-1) is iv;
+      begin
+        if iv'length > 1 then
+          return to_string(a_iv(a_iv'left)) & ", " & to_string(a_iv(a_iv'left + 1 to a_iv'right));
+        else
+          return to_string(iv(iv'left));
+        end if;
+      end function to_string;
+    begin
+      CovStructPtr(ID.ID).ItemCount := CovStructPtr(ID.ID).ItemCount + 1 ;
+      MinCovPercent := GetMinCov(ID, CovPointSubset) ;
+      if CovStructPtr(ID.ID).ThresholdingEnable then
+        MaxCovPercent := MinCovPercent + CovStructPtr(ID.ID).CovThreshold ;
+        if MinCovPercent < CovTargetPercent then
+          -- Clip at CovTargetPercent until reach CovTargetPercent
+          MaxCovPercent := minimum(MaxCovPercent, CovTargetPercent);
+        end if ;
+      else
+        if MinCovPercent < CovTargetPercent then
+          MaxCovPercent := CovTargetPercent ;
+        else
+          -- Done, Enable all bins
+          MaxCovPercent := GetMaxCov(ID, CovPointSubset) + 1.0 ;
+          -- MaxCovPercent := real'right ;  -- weight scale issues
+        end if ;
+      end if ;
+      CovLoop : for i in 1 to CovStructPtr(ID.ID).NumBins loop
+        if CheckCovPointSubsetInBinVal(CovStructPtr(ID.ID).CovBinPtr( i ).BinVal.all, CovPointSubset) then
+          if CovStructPtr(ID.ID).CovBinPtr(i).action = COV_COUNT and CovStructPtr(ID.ID).CovBinPtr(i).PercentCov < MaxCovPercent then
+            -- Calculate Weight based on CovStructPtr(ID.ID).WeightMode
+            --   Scale to current percentage goal:  MaxCov which can be < or > 100.0
+            WeightVec(i-1) := CalcWeight(ID, i, MaxCovPercent) ;
+          end if ;
+        end if ;
+      end loop CovLoop ;
+      -- DistInt returns integer range 0 to CovStructPtr(ID.ID).NumBins-1
+      -- Caution:  DistInt can fail when sum(WeightVec) > 2**31
+      --           See notes in CalcWeight for REMAIN_EXP
+--      CovStructPtr(ID.ID).LastStimGenIndex := 1 + RV.DistInt( WeightVec )  ; -- return range 1 to CovStructPtr(ID.ID).NumBins
+
+      AlertIf(maximum(WeightVec) = 0, OSVVM_COVERAGE_ALERTLOG_ID, "Subset (" & to_string(CovPointSubset) & ") is not found in coverage. Maybe missing or incorrect IsCovered?", FAILURE) ;
+
+      DistInt(CovStructPtr(ID.ID).RV, rInt, WeightVec) ;
+      CovStructPtr(ID.ID).LastStimGenIndex := 1 + rInt  ; -- return range 1 to CovStructPtr(ID.ID).NumBins
+      CovStructPtr(ID.ID).LastIndex := CovStructPtr(ID.ID).LastStimGenIndex ;
+      return CovStructPtr(ID.ID).LastStimGenIndex ;
+    end function GetRandIndex ;
+
+    ------------------------------------------------------------
     impure function GetRandIndex (ID : CoverageIDType) return integer is
     ------------------------------------------------------------
     begin
       return GetRandIndex(ID, CovStructPtr(ID.ID).CovTarget) ;
+    end function GetRandIndex ;
+
+    ------------------------------------------------------------
+    impure function GetRandIndex (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer is
+    ------------------------------------------------------------
+    begin
+      return GetRandIndex(ID, CovStructPtr(ID.ID).CovTarget, CovPointSubset) ;
     end function GetRandIndex ;
 
     ------------------------------------------------------------
@@ -3477,6 +3666,13 @@ package body CoveragePkg is
     ------------------------------------------------------------
     begin
       return CovStructPtr(ID.ID).CovBinPtr( GetRandIndex(ID, PercentCov) ).BinVal.all ;  -- GetBinVal
+    end function GetRandBinVal ;
+
+    ------------------------------------------------------------
+    impure function GetRandBinVal (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return RangeArrayType is
+    ------------------------------------------------------------
+    begin
+      return CovStructPtr(ID.ID).CovBinPtr( GetRandIndex(ID, PercentCov, CovPointSubset) ).BinVal.all ;  -- GetBinVal
     end function GetRandBinVal ;
 
     ------------------------------------------------------------
@@ -3640,10 +3836,24 @@ package body CoveragePkg is
     end function GetRandPoint ;
 
     ------------------------------------------------------------
+    impure function GetRandPoint (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer_vector is
+    ------------------------------------------------------------
+    begin
+      return ToRandPoint(ID, GetRandBinVal(ID, CovStructPtr(ID.ID).CovTarget, CovPointSubset)) ;
+    end function GetRandPoint ;
+
+    ------------------------------------------------------------
     impure function GetRandPoint (ID : CoverageIDType; PercentCov : real ) return integer_vector is
     ------------------------------------------------------------
     begin
       return ToRandPoint(ID, GetRandBinVal(ID, PercentCov)) ;
+    end function GetRandPoint ;
+
+    ------------------------------------------------------------
+    impure function GetRandPoint (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return integer_vector is
+    ------------------------------------------------------------
+    begin
+      return ToRandPoint(ID, GetRandBinVal(ID, PercentCov, CovPointSubset)) ;
     end function GetRandPoint ;
 
     ------------------------------------------------------------
@@ -3738,6 +3948,14 @@ package body CoveragePkg is
     ------------------------------------------------------------
     begin
       return ToRandPoint(ID, GetRandBinVal(ID, CovStructPtr(ID.ID).CovTarget)) ;
+    end function RandCovPoint ;
+
+    ------------------------------------------------------------
+    -- deprecated, see GetRandPoint
+    impure function RandCovPoint (ID : CoverageIDType; CovPointSubset : integer_vector) return integer_vector is
+    ------------------------------------------------------------
+    begin
+      return ToRandPoint(ID, GetRandBinVal(ID, CovStructPtr(ID.ID).CovTarget, CovPointSubset)) ;
     end function RandCovPoint ;
 
     ------------------------------------------------------------
@@ -5461,6 +5679,13 @@ package body CoveragePkg is
     end procedure ClearCov ;
 
     ------------------------------------------------------------
+    procedure ClearCov (CovPointSubset : integer_vector) is
+    ------------------------------------------------------------
+    begin
+      ClearCov(COV_STRUCT_ID_DEFAULT, CovPointSubset) ;
+    end procedure ClearCov;
+
+    ------------------------------------------------------------
     -- deprecated
     procedure SetCovZero is
     ------------------------------------------------------------
@@ -5483,6 +5708,13 @@ package body CoveragePkg is
     end function GetMinCov ;
 
     ------------------------------------------------------------
+    impure function GetMinCov (CovPointSubset : integer_vector) return real is
+    ------------------------------------------------------------
+    begin
+      return GetMinCov(COV_STRUCT_ID_DEFAULT, CovPointSubset) ;
+    end function GetMinCov ;
+
+    ------------------------------------------------------------
     impure function GetMinCount return integer is
     ------------------------------------------------------------
     begin
@@ -5494,6 +5726,13 @@ package body CoveragePkg is
     ------------------------------------------------------------
     begin
       return GetMaxCov(COV_STRUCT_ID_DEFAULT) ;
+    end function GetMaxCov ;
+
+    ------------------------------------------------------------
+    impure function GetMaxCov (CovPointSubset : integer_vector ) return real is
+    ------------------------------------------------------------
+    begin
+      return GetMaxCov(COV_STRUCT_ID_DEFAULT, CovPointSubset) ;
     end function GetMaxCov ;
 
     ------------------------------------------------------------
@@ -5511,10 +5750,24 @@ package body CoveragePkg is
     end function CountCovHoles ;
 
     ------------------------------------------------------------
+    impure function CountCovHoles ( PercentCov : real; CovPointSubset : integer_vector ) return integer is
+    ------------------------------------------------------------
+    begin
+      return CountCovHoles(COV_STRUCT_ID_DEFAULT, PercentCov, CovPointSubset) ;
+    end function CountCovHoles ;
+
+    ------------------------------------------------------------
     impure function CountCovHoles return integer is
     ------------------------------------------------------------
     begin
       return CountCovHoles(COV_STRUCT_ID_DEFAULT) ;
+    end function CountCovHoles ;
+
+    ------------------------------------------------------------
+    impure function CountCovHoles ( CovPointSubset : integer_vector ) return integer is
+    ------------------------------------------------------------
+    begin
+      return CountCovHoles(COV_STRUCT_ID_DEFAULT, CovPointSubset) ;
     end function CountCovHoles ;
 
     ------------------------------------------------------------
@@ -5529,6 +5782,12 @@ package body CoveragePkg is
     ------------------------------------------------------------
     begin
       return IsCovered(COV_STRUCT_ID_DEFAULT) ;
+    end function IsCovered ;
+
+    ------------------------------------------------------------
+    impure function IsCovered (CovPointSubset : integer_vector) return boolean is
+    begin
+      return IsCovered(COV_STRUCT_ID_DEFAULT, CovPointSubset) ;
     end function IsCovered ;
 
     ------------------------------------------------------------
@@ -5589,10 +5848,24 @@ package body CoveragePkg is
     end function GetRandIndex ;
 
     ------------------------------------------------------------
+    impure function GetRandIndex ( CovTargetPercent : real; CovPointSubset : integer_vector ) return integer is
+    ------------------------------------------------------------
+    begin
+      return GetRandIndex(COV_STRUCT_ID_DEFAULT, CovTargetPercent, CovPointSubset) ;
+    end function GetRandIndex ;
+
+    ------------------------------------------------------------
     impure function GetRandIndex return integer is
     ------------------------------------------------------------
     begin
       return GetRandIndex(COV_STRUCT_ID_DEFAULT) ;
+    end function GetRandIndex ;
+
+    ------------------------------------------------------------
+    impure function GetRandIndex (CovPointSubset : integer_vector ) return integer is
+    ------------------------------------------------------------
+    begin
+      return GetRandIndex(COV_STRUCT_ID_DEFAULT, CovPointSubset) ;
     end function GetRandIndex ;
 
     ------------------------------------------------------------
@@ -5650,6 +5923,13 @@ package body CoveragePkg is
     ------------------------------------------------------------
     begin
       return GetRandBinVal(COV_STRUCT_ID_DEFAULT, PercentCov) ;  -- GetBinVal
+    end function GetRandBinVal ;
+
+    ------------------------------------------------------------
+    impure function GetRandBinVal ( PercentCov : real; CovPointSubset : integer_vector ) return RangeArrayType is
+    ------------------------------------------------------------
+    begin
+      return GetRandBinVal(COV_STRUCT_ID_DEFAULT, PercentCov, CovPointSubset) ;  -- GetBinVal
     end function GetRandBinVal ;
 
     ------------------------------------------------------------
@@ -5771,10 +6051,24 @@ package body CoveragePkg is
     end function GetRandPoint ;
 
     ------------------------------------------------------------
+    impure function GetRandPoint (CovPointSubset : integer_vector ) return integer_vector is
+    ------------------------------------------------------------
+    begin
+      return     GetRandPoint(COV_STRUCT_ID_DEFAULT, CovPointSubset) ;
+    end function GetRandPoint ;
+
+    ------------------------------------------------------------
     impure function GetRandPoint ( PercentCov : real ) return integer_vector is
     ------------------------------------------------------------
     begin
       return     GetRandPoint(COV_STRUCT_ID_DEFAULT, PercentCov) ;
+    end function GetRandPoint ;
+
+    ------------------------------------------------------------
+    impure function GetRandPoint ( PercentCov : real; CovPointSubset : integer_vector ) return integer_vector is
+    ------------------------------------------------------------
+    begin
+      return     GetRandPoint(COV_STRUCT_ID_DEFAULT, PercentCov, CovPointSubset) ;
     end function GetRandPoint ;
 
     ------------------------------------------------------------
@@ -5869,6 +6163,14 @@ package body CoveragePkg is
     ------------------------------------------------------------
     begin
       return     GetRandPoint(COV_STRUCT_ID_DEFAULT) ;
+    end function RandCovPoint ;
+
+    ------------------------------------------------------------
+    -- deprecated, see GetRandPoint
+    impure function RandCovPoint ( CovPointSubset : integer_vector ) return integer_vector is
+    ------------------------------------------------------------
+    begin
+      return     GetRandPoint(COV_STRUCT_ID_DEFAULT, CovPointSubset) ;
     end function RandCovPoint ;
 
     ------------------------------------------------------------
@@ -6921,6 +7223,10 @@ package body CoveragePkg is
     CoverageStore.ClearCov (ID) ;
   end procedure ClearCov ;
 
+  procedure ClearCov (ID : CoverageIDType; CovPointSubset : integer_vector) is
+  begin
+    CoverageStore.ClearCov (ID, CovPointSubset) ;
+  end procedure ClearCov;
 
   ------------------------------------------------------------
   -- /////////////////////////////////////////
@@ -6938,6 +7244,10 @@ package body CoveragePkg is
     return CoverageStore.IsCovered (ID) ;
   end function IsCovered ;
 
+  impure function IsCovered (ID : CoverageIDType; CovPointSubset : integer_vector) return boolean is
+  begin
+    return CoverageStore.IsCovered (ID, CovPointSubset) ;
+  end function IsCovered ;
 
   impure function IsInitialized (ID : CoverageIDType) return boolean is
   begin
@@ -6978,6 +7288,11 @@ package body CoveragePkg is
     return CoverageStore.GetMinCov (ID) ;
   end function GetMinCov ;
 
+  impure function GetMinCov (ID : CoverageIDType; CovPointSubset : integer_vector) return real is
+  begin
+    return CoverageStore.GetMinCov (ID, CovPointSubset) ;
+  end function GetMinCov ;
+
   impure function GetMinCount (ID : CoverageIDType) return integer is
   begin
     return CoverageStore.GetMinCount (ID) ;
@@ -6986,6 +7301,11 @@ package body CoveragePkg is
   impure function GetMaxCov (ID : CoverageIDType) return real is
   begin
     return CoverageStore.GetMaxCov (ID) ;
+  end function GetMaxCov ;
+
+  impure function GetMaxCov (ID : CoverageIDType; CovPointSubset : integer_vector) return real is
+  begin
+    return CoverageStore.GetMaxCov (ID, CovPointSubset) ;
   end function GetMaxCov ;
 
   impure function GetMaxCount (ID : CoverageIDType) return integer is
@@ -7000,11 +7320,20 @@ package body CoveragePkg is
     return CoverageStore.CountCovHoles (ID, PercentCov) ;
   end function CountCovHoles ;
 
+  impure function CountCovHoles (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return integer is
+  begin
+    return CoverageStore.CountCovHoles (ID, PercentCov, CovPointSubset) ;
+  end function CountCovHoles ;
+
   impure function CountCovHoles (ID : CoverageIDType) return integer is
   begin
     return CoverageStore.CountCovHoles (ID) ;
   end function CountCovHoles ;
 
+  impure function CountCovHoles (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer is
+  begin
+    return CoverageStore.CountCovHoles (ID, CovPointSubset) ;
+  end function CountCovHoles ;
 
   ------------------------------------------------------------
   -- /////////////////////////////////////////
@@ -7052,9 +7381,19 @@ package body CoveragePkg is
     return CoverageStore.GetRandPoint (ID) ;
   end function GetRandPoint ;
 
+  impure function GetRandPoint (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer_vector is
+  begin
+    return CoverageStore.GetRandPoint (ID, CovPointSubset) ;
+  end function GetRandPoint ;
+
   impure function GetRandPoint (ID : CoverageIDType; PercentCov : real ) return integer_vector is
   begin
     return CoverageStore.GetRandPoint (ID, PercentCov) ;
+  end function GetRandPoint ;
+
+  impure function GetRandPoint (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return integer_vector is
+  begin
+    return CoverageStore.GetRandPoint (ID, PercentCov, CovPointSubset) ;
   end function GetRandPoint ;
 
   impure function GetIncPoint  (ID : CoverageIDType) return integer is
@@ -7125,6 +7464,11 @@ package body CoveragePkg is
     return CoverageStore.RandCovPoint (ID) ;
   end function RandCovPoint ;
 
+  impure function RandCovPoint (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer_vector is
+  begin
+    return CoverageStore.RandCovPoint (ID, CovPointSubset) ;
+  end function RandCovPoint ;
+
   impure function RandCovPoint (ID : CoverageIDType; PercentCov : real ) return integer_vector is
   begin
     return CoverageStore.RandCovPoint (ID, PercentCov) ;
@@ -7141,6 +7485,11 @@ package body CoveragePkg is
   impure function GetRandBinVal (ID : CoverageIDType; PercentCov : real ) return RangeArrayType is
   begin
     return CoverageStore.GetRandBinVal (ID, PercentCov) ;
+  end function GetRandBinVal ;
+
+  impure function GetRandBinVal (ID : CoverageIDType; PercentCov : real; CovPointSubset : integer_vector ) return RangeArrayType is
+  begin
+    return CoverageStore.GetRandBinVal (ID, PercentCov, CovPointSubset) ;
   end function GetRandBinVal ;
 
   impure function GetRandBinVal (ID : CoverageIDType) return RangeArrayType is
@@ -7218,9 +7567,19 @@ package body CoveragePkg is
     return CoverageStore.GetRandIndex (ID, CovTargetPercent) ;
   end function GetRandIndex ;
 
+  impure function GetRandIndex (ID : CoverageIDType; CovTargetPercent : real; CovPointSubset : integer_vector ) return integer is
+  begin
+    return CoverageStore.GetRandIndex (ID, CovTargetPercent, CovPointSubset) ;
+  end function GetRandIndex ;
+
   impure function GetRandIndex (ID : CoverageIDType) return integer is
   begin
     return CoverageStore.GetRandIndex (ID => ID)  ;
+  end function GetRandIndex ;
+
+  impure function GetRandIndex (ID : CoverageIDType; CovPointSubset : integer_vector ) return integer is
+  begin
+    return CoverageStore.GetRandIndex (ID => ID, CovPointSubset => CovPointSubset)  ;
   end function GetRandIndex ;
 
   impure function GetLastIndex (ID : CoverageIDType) return integer is
